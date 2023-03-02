@@ -4,7 +4,7 @@
 
 //--------------------------------------------------------//
 
-#include <I2C_Handler.h>
+#include "I2C_Handler.h"
 #include <IncludeLists.h>
 
 // Use this instead of [Wire.beginTransmission()]
@@ -24,7 +24,7 @@ void I2C_End_Send(){
  * 
  *  For pwm: will only send first 8 decimal places
  */
-bool I2C_Send_PWM_DIR (Motor motor, float pwm, uint8_t dir){
+bool I2C_Send_PWM_DIR (Motor motor, float pwm, int dir){
     if (pwm < 0.0 || pwm > 1.0){return false;}
     if (dir != 0 && dir != 1 && dir != 2){return false;}
 

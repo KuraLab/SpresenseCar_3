@@ -14,20 +14,12 @@
 #include <string>
 
 // Library codes
-// -> Pure #define definitions
-#include <Global_Variables.h>
-#include <Pin_Mapping.h>
-// -> Functions definitions
-#include <QOL_Func.h>
-#include <I2C_Handler.h>
-// -> Basic functionality definitions
-#include <MainCore_Init.h>
-#include <PikaPika_Default_Handler.h>
+#include <LibraryCodes/LibraryCodes_IncludeLists.h>
 
 // MP Task List
 //TODO
 
 // Student codes
-#include "StudentCodes/StudentCodes_IncludeLists.h"
+#include <StudentCodes/StudentCodes_IncludeLists.h>
 
 #endif
