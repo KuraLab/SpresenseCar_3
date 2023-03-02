@@ -1,22 +1,24 @@
 // Written by MAX (Created 02 Mar, 2023)
 
-// Features:    Spresense-related Global Variables
+// Features:    Spresense-related Global Constant
 
 //--------------------------------------------------------//
 
-#ifndef GLOBAL_VARIABLE_H
-#define GLOBAL_VARIABLE_H
-
-// PI
-#define PI                              3.14
+#ifndef GLOBAL_CONSTANT_H
+#define GLOBAL_CONSTANT_H
 
 // Serial Baud Rate
 #define DEFAULT_BAUD_RATE               115200
 
+// Timer Interrupt
+#define DEFAULT_TIMER_INT_INTERVAL      100     // [us] (10kHz)
+
 // SubCore ID
-#define SUBCORE_1                       1
-#define SUBCORE_2                       2
-#define SUBCORE_3                       3
+#define SUBCORE_1_ID                    1
+#define SUBCORE_2_ID                    2
+#define SUBCORE_3_ID                    3
+#define SUBCORE_4_ID                    4
+#define SUBCORE_5_ID                    5
 
 // I2C
 // -> Address of all components
@@ -29,8 +31,6 @@
 #define PIKA_SENSOR_COUNT               8
 // -> Blink Duration
 #define DEFAULT_PIKA_BLINK_TIME         100     // LED点灯時間[回-dt]
-// -> Light Sensor Lifetime
-#define DEFAULT_PIKA_LIFETIME           10      // [タイマー割り込み回数]
 // -> Minimum Interval between Interrupts
 #define DEFAULT_PIKA_MIN_INTERRUPT_INTERVAL 0   // [ms]
 

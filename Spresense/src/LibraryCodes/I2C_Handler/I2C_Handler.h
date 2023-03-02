@@ -7,6 +7,9 @@
 #ifndef I2C_HANDLER_H
 #define I2C_HANDLER_H
 
+// for including definition of enum Motor
+#include "../Global_Constant/Global_Constant.h"
+
 // Use this instead of [Wire.beginTransmission()]
 void I2C_Start_Send();
 
@@ -20,7 +23,7 @@ void I2C_End_Send();
  * 
  *  For pwm: will only send first 8 decimal places
  */
-bool I2C_Send_PWM_DIR (Motor motor, float pwm, uint8_t dir);
+bool I2C_Send_PWM_DIR (Motor motor, float pwm, int dir);
 
 /**
  *  Input validation:

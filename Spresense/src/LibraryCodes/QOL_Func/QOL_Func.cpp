@@ -1,8 +1,8 @@
 // Written by MAX (Created 02 Mar, 2023)
 
-// Features:    Initialization code for MainCore
+// Features:    Quality-Of-Life Functions
 
 //--------------------------------------------------------//
 
-#include <MainCore_Init.h>
+#include "QOL_Func.h"
 #include <IncludeLists.h>
