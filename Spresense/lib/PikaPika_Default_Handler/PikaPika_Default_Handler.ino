@@ -4,8 +4,8 @@
 
 //--------------------------------------------------------//
 
-#include "PikaPika_Default_Handler.h"
-#include "../IncludeLists.h"
+#include <PikaPika_Default_Handler.h>
+#include <IncludeLists.h>
 
 void Default_Pika_Int_Handler_0();
 void Default_Pika_Int_Handler_1();

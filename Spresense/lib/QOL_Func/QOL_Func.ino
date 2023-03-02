@@ -4,5 +4,5 @@
 
 //--------------------------------------------------------//
 
-#include "QOL_Func.h"
-#include "../IncludeLists.h"
+#include <QOL_Func.h>
+#include <IncludeLists.h>
