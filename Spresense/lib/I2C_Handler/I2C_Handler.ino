@@ -4,8 +4,8 @@
 
 //--------------------------------------------------------//
 
-#include "I2C_Handler.h"
-#include "../IncludeLists.h"
+#include <I2C_Handler.h>
+#include <IncludeLists.h>
 
 // Use this instead of [Wire.beginTransmission()]
 void I2C_Start_Send(){
