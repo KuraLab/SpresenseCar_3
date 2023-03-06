@@ -4,24 +4,24 @@
 
 //--------------------------------------------------------//
 
-#include "IncludeLists.h"
+#ifndef SUBCORE
+
+#include <IncludeLists.h>
+
+using namespace MAX2022;
 
 void setup() {
-  // [INITIALIZATION USE] DO NOT DELETE THE FOLLOWING CODES
+  //---[INITIALIZATION USE]---------------------------------//
+  // DO NOT DELETE THE FOLLOWING CODES
   // -> Put your custom handler for PikaPika Interrupts here, leave it empty if you are not using PikaPika
   PIKAPIKA_Set_Custom_Handler();
   // -> Put your custom period for Timer Interrupt here, default = 100us(->10kHz)
   Timer_Interrupt_Set_Period();
   // -> [IMPORTANT] DO NOT DELETE OR MODIFY THIS LINE
   MainCore_Init();
-  // [INITIALIZATION FINISHED] Feel free to add your codes below
-  //--------------------------------------------------------//
+  //---[INITIALIZATION FINISHED]----------------------------//
 
-  // put your setup code here, to run once:
-  // Serial.begin(115200);
-  // Serial.println(asdf);
-
-  // pinMode(LED0, OUTPUT);
+  // MPLog("%d \n", SUBCORE);
 }
 
 void loop() {
@@ -34,5 +34,9 @@ void loop() {
 
 unsigned int Timer_Interrupt_Routine(){
 
+
+  // PLEASE DO NOT CHANGE THIS RETURN, USE SETTER TO CHANGE PERIOD
   return get_Timer_Interrupt_Period();
 }
+
+#endif

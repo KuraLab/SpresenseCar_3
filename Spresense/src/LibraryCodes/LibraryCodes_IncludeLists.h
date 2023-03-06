@@ -16,7 +16,9 @@
 #include "I2C_Handler/I2C_Handler.h"
 
 // Basic functionality definitions
-#include "MainCore_Init/MainCore_Init.h"
+#ifndef SUBCORE
+    #include "MainCore_Init/MainCore_Init.h"
+#endif
 #include "PikaPika_Default_Handler/PikaPika_Default_Handler.h"
 
 #endif

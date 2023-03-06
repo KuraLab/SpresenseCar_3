@@ -4,6 +4,8 @@
 
 //--------------------------------------------------------//
 
+#ifndef SUBCORE
+
 #ifndef MAINCORE_INIT_H
 #define MAINCORE_INIT_H
 
@@ -46,5 +48,7 @@ void Timer_Interrupt_Init();
 //--------------------------------------------------------//
 
 void Finish_Init_LED_Flash();
+
+#endif
 
 #endif

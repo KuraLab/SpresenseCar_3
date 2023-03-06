@@ -1,6 +1,6 @@
 // Written by MAX (Created 02 Mar, 2023)
 
-// Features:    List of all header files for #include
+// Features:    List of ALL header files for #include
 
 //--------------------------------------------------------//
 
@@ -15,9 +15,6 @@
 
 // Library codes
 #include <LibraryCodes/LibraryCodes_IncludeLists.h>
-
-// MP Task List
-//TODO
 
 // Student codes
 #include <StudentCodes/StudentCodes_IncludeLists.h>
