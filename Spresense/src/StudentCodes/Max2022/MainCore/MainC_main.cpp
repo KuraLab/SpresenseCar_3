@@ -12,6 +12,7 @@
 #ifndef SUBCORE
 
 // Files created by me(max12345)
+#include "MainC_main.h"
 #include <IncludeLists.h>
 // Files from libraries
 #include <Arduino.h>

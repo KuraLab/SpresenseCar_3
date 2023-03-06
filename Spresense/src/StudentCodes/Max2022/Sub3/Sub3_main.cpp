@@ -9,6 +9,7 @@
 
 //--------------------------------------------------------//
 
+#include "Sub3_main.h"
 #include "Sub3_TaskList.h"
 #include <IncludeLists.h>
 
@@ -22,15 +23,15 @@ namespace MAX2022
     uint64_t    encoder_last_access_time[4] = {0,0,0,0};
     float       encoder_mul[4] = {1.0, 1.0, 1.0, 1.0};
 
-    // Functions Declaration
-    void Interrupt_Tick_Update(uint8_t motor_num);
-    void M1_Int_Handler();
-    void M2_Int_Handler();
-    void M3_Int_Handler();
-    void M4_Int_Handler();
+    // Functions Declaration (declared in header)
+    // void Interrupt_Tick_Update(uint8_t motor_num);
+    // void M1_Int_Handler();
+    // void M2_Int_Handler();
+    // void M3_Int_Handler();
+    // void M4_Int_Handler();
 
-    // Speed in tick/s
-    float get_Speed_Since_Last_Access(uint8_t motor_num);
+    // Speed in tick/s (declared in header)
+    // float get_Speed_Since_Last_Access(uint8_t motor_num);
 
     //--------------------------------------------------------//
 

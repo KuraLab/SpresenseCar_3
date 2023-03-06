@@ -1,6 +1,6 @@
 // Written by MAX (Created 20-06-2022)
 
-/* Features : Write test functions here, 
+/* Features:  Write test functions here, 
               so main program will not be messy
 */
 
@@ -26,7 +26,7 @@
 
 namespace MAX2022
 {
-    //EXTERN of stuff from Main file
+    // EXTERN of stuff from Main file
     // -> Variables
     // -> Functions
     //--------------------------------------------------------//
