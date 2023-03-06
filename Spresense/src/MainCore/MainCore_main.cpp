@@ -21,7 +21,6 @@ void setup() {
   MainCore_Init();
   //---[INITIALIZATION FINISHED]----------------------------//
 
-  // MPLog("%d \n", SUBCORE);
 }
 
 void loop() {
@@ -34,9 +33,8 @@ void loop() {
 
 unsigned int Timer_Interrupt_Routine(){
 
-
   // PLEASE DO NOT CHANGE THIS RETURN, USE SETTER TO CHANGE PERIOD
-  return get_Timer_Interrupt_Period();
+  return Timer_Interrupt_Get_Period();
 }
 
 #endif

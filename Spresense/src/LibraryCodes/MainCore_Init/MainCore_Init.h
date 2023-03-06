@@ -42,7 +42,7 @@ void MP_Init();
 void Timer_Interrupt_Set_Period(unsigned int new_timer_int_period);
 void Timer_Interrupt_Set_Period();
 // -> getter for Timer_Interrupt_Period
-unsigned int get_Timer_Interrupt_Period();
+unsigned int Timer_Interrupt_Get_Period();
 void Timer_Interrupt_Init();
 
 //--------------------------------------------------------//
