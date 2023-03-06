@@ -167,14 +167,14 @@ void MP_Init(){
 // Init Timer Interrupt
 static unsigned int Timer_Interrupt_Period = DEFAULT_TIMER_INT_INTERVAL;
 // -> Input your custom Timer Interrupt period here
-void Timer_Interrupt_Set_Period(unsigned int new_timer_int_period){
-    Timer_Interrupt_Period = new_timer_int_period;
+void Timer_Interrupt_Set_Period(unsigned int new_timer_int_period_us){
+    Timer_Interrupt_Period = new_timer_int_period_us;
 }
 void Timer_Interrupt_Set_Period(){
     Timer_Interrupt_Set_Period(DEFAULT_TIMER_INT_INTERVAL);
 }
 // -> getter for Timer_Interrupt_Period
-unsigned int get_Timer_Interrupt_Period(){
+unsigned int Timer_Interrupt_Get_Period(){
     return Timer_Interrupt_Period;
 }
 extern unsigned int Timer_Interrupt_Routine();
