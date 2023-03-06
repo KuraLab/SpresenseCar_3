@@ -7,7 +7,7 @@
 #ifndef I2C_HANDLER_H
 #define I2C_HANDLER_H
 
-// for including definition of enum Motor
+// For including definition of enum Motor
 #include "../Global_Constant/Global_Constant.h"
 
 // Use this instead of [Wire.beginTransmission()]

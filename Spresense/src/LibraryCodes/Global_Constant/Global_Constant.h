@@ -21,7 +21,7 @@
 #define SUBCORE_5_ID                    5
 
 // I2C
-// -> Address of all components
+// -> Address of Nucleo64
 #define NUCLEO_I2C_ADDR                 0x45>>1
 // -> Message Length
 #define I2C_MSG_LENGTH                  32

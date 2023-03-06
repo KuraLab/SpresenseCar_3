@@ -9,6 +9,7 @@
 
 //--------------------------------------------------------//
 
+#include "Sub2_main.h"
 #include "Sub2_TaskList.h"
 #include <IncludeLists.h>
 #include "../FFT_Param/FFT_Param.h"
@@ -119,22 +120,22 @@ namespace MAX2022
         }
     }
 
-    void test_20230215(){
-        // for (int i = 0; i < FFT_LEN/2; i++)
-        // {
-        //     MPLog("%5.5f", FFT_result[i]);
-        // }
-        // MPLog("\n");
+    // void test_20230215(){
+    //     // for (int i = 0; i < FFT_LEN/2; i++)
+    //     // {
+    //     //     MPLog("%5.5f", FFT_result[i]);
+    //     // }
+    //     // MPLog("\n");
 
-        for (int i = 1; i < FFT_LEN/2; i++)
-        {
-            if ((FFT_result[i]>FFT_result[i+1]) && (FFT_result[i]>FFT_result[i-1]))
-            {
-                MPLog("%d\n", i);
-                break;
-            }
-        }
-    }
+    //     for (int i = 1; i < FFT_LEN/2; i++)
+    //     {
+    //         if ((FFT_result[i]>FFT_result[i+1]) && (FFT_result[i]>FFT_result[i-1]))
+    //         {
+    //             MPLog("%d\n", i);
+    //             break;
+    //         }
+    //     }
+    // }
 }
 
 #endif
