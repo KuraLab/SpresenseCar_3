@@ -4,6 +4,8 @@
 
 //--------------------------------------------------------//
 
+#ifndef SUBCORE
+
 #include "MainCore_Init.h"
 #include <IncludeLists.h>
 
@@ -201,3 +203,5 @@ void Finish_Init_LED_Flash(){
     digitalWrite(LED3, LOW);
     // delay(500);
 }
+
+#endif
