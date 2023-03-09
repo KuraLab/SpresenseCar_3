@@ -21,17 +21,22 @@ void setup() {
   MainCore_Init();
   //---[INITIALIZATION FINISHED]----------------------------//
 
+  MainCore_setup();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(LED0, HIGH);
-  delay(1000);
-  digitalWrite(LED0, LOW);
-  delay(1000);
+  // digitalWrite(LED0, HIGH);
+  // delay(1000);
+  // digitalWrite(LED0, LOW);
+  // delay(1000);
+
+  MainCore_loop();
 }
 
 unsigned int Timer_Interrupt_Routine(){
+
+  FFT_PikaPika_Routine();
 
   // PLEASE DO NOT CHANGE THIS RETURN, USE SETTER TO CHANGE PERIOD
   return Timer_Interrupt_Get_Period();

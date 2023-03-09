@@ -23,7 +23,7 @@
 namespace MAX2022
 {
     void Sub2_setup(void){
-        MP.begin();
+        // MP.begin();
         arm_fft_init();
         phi_init();
     }
@@ -80,16 +80,16 @@ namespace MAX2022
                 arm_cmplx_mag_f32(dy_output_buffer, dy_FFT_result, FFT_LEN/2);
 
                 // determine if need to self-excite by finding peak
-                // if (!peak_check())
-                // {
-                //     MP.Send(C2_T3_NO_PEAK, C2_T3_NO_PEAK);  // メインコアに失敗を通報
-                // }
+                if (!peak_check())
+                {
+                    MP.Send(C2_T3_NO_PEAK, C2_T3_NO_PEAK);  // メインコアに失敗を通報
+                }
 
                 // FFT result preprocessing
-                // FFT_result_processing();
+                FFT_result_processing();
 
                 // estimate inner/outer layer  ********
-                // Judgement = inner_outer_estimate();
+                Judgement = inner_outer_estimate();
 
                 // print out data to Serial Monitor
                 // fft_data_print_out();

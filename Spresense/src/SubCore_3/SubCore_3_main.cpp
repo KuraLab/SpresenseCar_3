@@ -8,6 +8,8 @@
 
 #include <IncludeLists.h>
 
+using namespace MAX2022;
+
 void setup(){
     //---[INITIALIZATION USE]---------------------------------//
     // DO NOT CHANGE OR DELETE THE FOLLOWING CODES
@@ -16,10 +18,12 @@ void setup(){
     //---[INITIALIZATION FINISHED]----------------------------//
 
     MPLog("%d \n", SUBCORE);
+
+    // Sub3_setup();
 }
 
 void loop(){
-
+    // Sub3_loop();
 }
 
 #endif
