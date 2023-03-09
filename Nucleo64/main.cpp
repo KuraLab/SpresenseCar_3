@@ -15,7 +15,7 @@ void setup(){
     Curr_Motor_Input.M3_DIR = 1;
     Curr_Motor_Input.M4_DIR = 1;
 }
-aasasasdsewraa
+
 void loop(){
     // I2C_Receive is needed for receiving new motor input from Spresense
     // I2C_Receive_Routine();
