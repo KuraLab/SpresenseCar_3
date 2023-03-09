@@ -22,7 +22,7 @@
 namespace MAX2022
 {
     void Sub1_setup(void){
-        MP.begin();
+        // MP.begin();
     }
     
     void Sub1_loop(void){

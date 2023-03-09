@@ -36,7 +36,7 @@ namespace MAX2022
     //--------------------------------------------------------//
 
     void Sub3_setup(void){
-        MP.begin();
+        // MP.begin();
 
         Wire.begin();
         Wire.setClock(TWI_FREQ_400KHZ);
