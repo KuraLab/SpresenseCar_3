@@ -94,7 +94,7 @@ void Motor_DIR_Pin_Init(DigitalOut* motor_DIR[]){   //2x4 pins
 // Init Serial Communication
 void Serial_Init(BufferedSerial*& Serial_M){
     Serial_M = new BufferedSerial(CONSOLE_TX,CONSOLE_RX);
-    Serial_M->set_baud(115200);
+    Serial_M->set_baud(9600);
     Serial_M->set_format(
         /* bits */ 8,
         /* parity */ BufferedSerial::None,
