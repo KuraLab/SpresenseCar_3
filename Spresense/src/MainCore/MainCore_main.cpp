@@ -22,7 +22,6 @@ void setup() {
   //---[INITIALIZATION FINISHED]----------------------------//
 
   MainCore_setup();
-  dfgdfg
 }
 
 void loop() {
