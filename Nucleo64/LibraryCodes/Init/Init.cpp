@@ -53,6 +53,11 @@ void Motor_Input_Init(){
     Curr_Motor_Input.M2_PWM = 0.0;
     Curr_Motor_Input.M3_PWM = 0.0;
     Curr_Motor_Input.M4_PWM = 0.0;
+
+    Curr_Motor_Input.M1_MUL = 1.0;
+    Curr_Motor_Input.M2_MUL = 1.0;
+    Curr_Motor_Input.M3_MUL = 1.0;
+    Curr_Motor_Input.M4_MUL = 1.0;
 }
 
 // Init the pins for Motor Control
