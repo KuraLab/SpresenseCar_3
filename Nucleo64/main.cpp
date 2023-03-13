@@ -14,6 +14,8 @@ void setup(){
     Curr_Motor_Input.M2_DIR = 1;
     Curr_Motor_Input.M3_DIR = 1;
     Curr_Motor_Input.M4_DIR = 1;
+
+    Serial_println("here");
 }
 
 void loop(){

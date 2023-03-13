@@ -3,3 +3,13 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+
+# [main.cpp] of Spresense & Nucleo64
+Spresense/src/MainCore/
+Spresense/src/SubCore_1/
+Spresense/src/SubCore_2/
+Spresense/src/SubCore_3/
+Spresense/src/SubCore_4/
+Spresense/src/SubCore_5/
+Nucleo64/main.cpp
+Nucleo64/main.h

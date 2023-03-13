@@ -22,6 +22,7 @@ void setup() {
   //---[INITIALIZATION FINISHED]----------------------------//
 
   MainCore_setup();
+  dfdf
 }
 
 void loop() {

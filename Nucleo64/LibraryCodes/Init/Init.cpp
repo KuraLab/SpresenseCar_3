@@ -53,6 +53,11 @@ void Motor_Input_Init(){
     Curr_Motor_Input.M2_PWM = 0.0;
     Curr_Motor_Input.M3_PWM = 0.0;
     Curr_Motor_Input.M4_PWM = 0.0;
+
+    Curr_Motor_Input.M1_MUL = 1.0;
+    Curr_Motor_Input.M2_MUL = 1.0;
+    Curr_Motor_Input.M3_MUL = 1.0;
+    Curr_Motor_Input.M4_MUL = 1.0;
 }
 
 // Init the pins for Motor Control
@@ -94,7 +99,7 @@ void Motor_DIR_Pin_Init(DigitalOut* motor_DIR[]){   //2x4 pins
 // Init Serial Communication
 void Serial_Init(BufferedSerial*& Serial_M){
     Serial_M = new BufferedSerial(CONSOLE_TX,CONSOLE_RX);
-    Serial_M->set_baud(115200);
+    Serial_M->set_baud(9600);
     Serial_M->set_format(
         /* bits */ 8,
         /* parity */ BufferedSerial::None,
