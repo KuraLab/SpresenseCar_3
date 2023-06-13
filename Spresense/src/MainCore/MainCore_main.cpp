@@ -9,8 +9,6 @@
 #include <IncludeLists.h>
 
 using namespace MAX2022;
-#define outputA PIN_D25
-int aState;
 void setup() {
   //---[INITIALIZATION USE]---------------------------------//
   // DO NOT DELETE THE FOLLOWING CODES
@@ -23,19 +21,17 @@ void setup() {
   //---[INITIALIZATION FINISHED]----------------------------//
   MainCore_setup();
   //Sub3_setup();
-  pinMode (outputA,INPUT);
 }
 
 void loop() {
-  aState =digitalRead(outputA);
-  Serial.print(aState);
+
   // put your main code here, to run repeatedly:
   // digitalWrite(LED0, HIGH);
   // delay(1000);
   // digitalWrite(LED0, LOW);
   // delay(1000);
   //test_init2();
-  //test_init3();
+  test_init3();
   //Sub3_loop();
   //MainCore_loop();
 }

@@ -46,10 +46,10 @@ namespace MAX2022
         pinMode(M3_HALL, INPUT);
         pinMode(M4_HALL, INPUT);
 
-        attachInterrupt(digitalPinToInterrupt(M1_HALL), M1_Int_Handler, FALLING);
-        attachInterrupt(digitalPinToInterrupt(M2_HALL), M2_Int_Handler, FALLING);
-        attachInterrupt(digitalPinToInterrupt(M3_HALL), M3_Int_Handler, FALLING);
-        attachInterrupt(digitalPinToInterrupt(M4_HALL), M4_Int_Handler, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(M1_HALL), M1_Int_Handler, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(M2_HALL), M2_Int_Handler, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(M3_HALL), M3_Int_Handler, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(M4_HALL), M4_Int_Handler, FALLING);
 
         delay(1000);
 

@@ -15,7 +15,6 @@ void setup(){
     MPLog("SubCore 1 Initialized \n");
     //---[INITIALIZATION FINISHED]----------------------------//
     Serial2.begin(115200);
-    Serial.begin(115200);
     MPLog("%d \n", 1);
     //Sub1_setup();
 }

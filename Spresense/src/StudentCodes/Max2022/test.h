@@ -252,7 +252,7 @@ namespace MAX2022
 
       // Wire.beginTransmission(NUCLEO_I2C_ADDR);
       // Wire.endTransmission();
-      int u=0;
+      int u=10;
       int u2[2];
       int8_t msgid;
       //double* ptr2; 

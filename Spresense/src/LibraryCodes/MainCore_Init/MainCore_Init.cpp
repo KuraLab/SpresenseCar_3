@@ -77,44 +77,44 @@ void PIKAPIKA_Init(){
     pinMode(PIKAPIKA_LIGHT_7, INPUT);
 
     if (Custom_PIKAPIKA_Handler_0 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_0), Custom_PIKAPIKA_Handler_0, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_0), Custom_PIKAPIKA_Handler_0, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_0), Default_Pika_Int_Handler_0, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_0), Default_Pika_Int_Handler_0, FALLING);
     }
     if (Custom_PIKAPIKA_Handler_1 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_1), Custom_PIKAPIKA_Handler_1, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_1), Custom_PIKAPIKA_Handler_1, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_1), Default_Pika_Int_Handler_1, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_1), Default_Pika_Int_Handler_1, FALLING);
     }
     if (Custom_PIKAPIKA_Handler_2 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_2), Custom_PIKAPIKA_Handler_2, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_2), Custom_PIKAPIKA_Handler_2, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_2), Default_Pika_Int_Handler_2, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_2), Default_Pika_Int_Handler_2, FALLING);
     }
     if (Custom_PIKAPIKA_Handler_3 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_3), Custom_PIKAPIKA_Handler_3, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_3), Custom_PIKAPIKA_Handler_3, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_3), Default_Pika_Int_Handler_3, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_3), Default_Pika_Int_Handler_3, FALLING);
     }
     if (Custom_PIKAPIKA_Handler_4 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_4), Custom_PIKAPIKA_Handler_4, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_4), Custom_PIKAPIKA_Handler_4, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_4), Default_Pika_Int_Handler_4, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_4), Default_Pika_Int_Handler_4, FALLING);
     }
     if (Custom_PIKAPIKA_Handler_5 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_5), Custom_PIKAPIKA_Handler_5, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_5), Custom_PIKAPIKA_Handler_5, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_5), Default_Pika_Int_Handler_5, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_5), Default_Pika_Int_Handler_5, FALLING);
     }
     if (Custom_PIKAPIKA_Handler_6 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_6), Custom_PIKAPIKA_Handler_6, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_6), Custom_PIKAPIKA_Handler_6, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_6), Default_Pika_Int_Handler_6, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_6), Default_Pika_Int_Handler_6, FALLING);
     }
     if (Custom_PIKAPIKA_Handler_7 != nullptr){
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_7), Custom_PIKAPIKA_Handler_7, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_7), Custom_PIKAPIKA_Handler_7, FALLING);
     } else {
-        attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_7), Default_Pika_Int_Handler_7, FALLING);
+        //attachInterrupt(digitalPinToInterrupt(PIKAPIKA_LIGHT_7), Default_Pika_Int_Handler_7, FALLING);
     }    
 }
 
