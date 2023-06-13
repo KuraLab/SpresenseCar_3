@@ -11,6 +11,8 @@
 #include "Global_Constant/Global_Constant.h"
 #include "Pin_Mapping/Pin_Mapping.h"
 
+//CBF
+#include "1DCBF/CBF1D.h"
 // Functions definitions
 #include "QOL_Func/QOL_Func.h"
 #include "I2C_Handler/I2C_Handler.h"

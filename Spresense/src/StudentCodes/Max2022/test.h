@@ -156,22 +156,165 @@ namespace MAX2022
       I2C_Send_PWM_DIR(Motor_BR, 1.0, 1);
       // delay(50);
       I2C_Send_Encoder(1.0, 1.0, 1.0, 1.0);
-      delay(5000);
-      I2C_Send_PWM_DIR(Motor_TL, 0.0, 1);
+      delay(1000);
+      I2C_Send_PWM_DIR(Motor_TL, 1.0, 0);
       // delay(50);
-      I2C_Send_PWM_DIR(Motor_TR, 0.0, 1);
+      I2C_Send_PWM_DIR(Motor_TR, 1.0, 0);
       // delay(50);
-      I2C_Send_PWM_DIR(Motor_BL, 0.0, 1);
+      I2C_Send_PWM_DIR(Motor_BL, 1.0, 0);
       // delay(50);
-      I2C_Send_PWM_DIR(Motor_BR, 0.0, 1);
+      I2C_Send_PWM_DIR(Motor_BR, 1.0, 0);
       // delay(50);
 
       I2C_End_Send();
-
+      delay(1000);
       Serial.println("sent la");
     }
-    inline void test_loop(){
     
+     inline void test_init3(){
+      // delay(500);
+
+      // i2c_detect();
+
+      // float input = 1.0123456789;
+      // char tempp[8];
+
+      // int asdf = (int)input;
+      // int qwer = (int)((input-(int)input)*100000000);
+      // itoa((int)((input-(int)input)*100000000),tempp,10);  // no -ve, >0 part will be omitted, only to 8 decimal
+      // Serial.println(qwer);
+      // Serial.println(tempp);
+      // std::string temps = tempp;
+      // temps.insert(0,8-temps.length(),'0');
+
+      // char tempp2[9];               // no -ve please, will send 9 digits, as 10th degit will have boundary for int (and uint32_t)
+      // itoa(135,tempp2,10);    
+      // std::string temps = tempp2;
+      // temps.insert(0,9-temps.length(),'0');
+      // itoa(123456789,tempp2,10);
+      // std::string temps2 = tempp2;
+      // temps2.insert(0,9-temps2.length(),'0');
+
+      // float mod_input = fmod(input, 2*PI);      // will limit input to [0,2pi]
+      // int asdf = (int)(mod_input);
+      // int qwer = (int)((mod_input-(int)mod_input)*100000000);
+      // itoa((int)((mod_input-(int)mod_input)*100000000),tempp,10);  // no -ve, >0 part will be omitted, only to 8 decimal
+      // Serial.println(qwer);
+      // Serial.println(tempp);
+
+      // char tempp3a[6];      // only 6 decimal points cause no enough message length
+      // char tempp3b[6];      // no -ve, >0 part will be omitted
+      // char tempp3c[6];
+      // char tempp3d[6];
+      // itoa((int)((0.1123456-(int)0.1123456)*100000000),tempp3a,10);
+      // itoa((int)((0.1223456-(int)0.1223456)*100000000),tempp3b,10);
+      // itoa((int)((0.1233456-(int)0.1233456)*100000000),tempp3c,10);
+      // itoa((int)((0.1234456-(int)0.1234456)*100000000),tempp3d,10);
+
+
+      // char msgg[I2C_MSG_LENGTH];
+    
+      // msgg[0] = '0';
+      // Serial.println(msgg);
+
+      // msgg[1] = '0';
+      // msgg[2] = asdf + '0';
+      // memcpy(&(msgg[3]), temps.c_str(), 8);
+      // msgg[11] = '1';
+
+      // memcpy(&msgg[1],temps.c_str(),9);
+      // // Serial.println(temps.c_str());
+      // // Serial.println(msgg);
+      // memcpy(&msgg[10],temps2.c_str(),9);
+      // // Serial.println(temps2.c_str());
+      // // Serial.println(msgg);
+
+      // msgg[1] = asdf + '0';
+      // memcpy(&(msgg[2]), &tempp[0], 8);
+
+      // memcpy(&(msgg[1]), &tempp3a[0], 6);
+      // memcpy(&(msgg[7]), &tempp3b[0], 6);
+      // memcpy(&(msgg[13]), &tempp3c[0], 6);
+      // memcpy(&(msgg[19]), &tempp3d[0], 6);
+
+
+      // Serial.println(msgg);
+      //Serial.println("now send la");
+
+      // Wire.beginTransmission(NUCLEO_I2C_ADDR);
+      // Wire.write(msgg);
+      // Wire.endTransmission();
+
+      // I2C_Send_PWM_DIR(Motor_TR, 0.0123456789, 1);
+      // I2C_Send_Target_XY(100,123456789);
+      // I2C_Send_Radian(10.2566f);
+      // I2C_Send_Encoder(1.0, 0.205, 0.012, 0.0205);
+
+      // Wire.beginTransmission(NUCLEO_I2C_ADDR);
+      // Wire.endTransmission();
+      int u=0;
+      int u2[2];
+      int8_t msgid;
+      //double* ptr2; 
+      //ptr2= CBF1D(u);
+      //for (int i = 0; i < 2; ++i) {
+      //  u2[i]=ptr2[i];
+      //}
+    MP.Send(msgid,u,1);
+    MP.RecvTimeout(0);
+    MP.Recv(&msgid,&u2[0],1);
+    MP.Recv(&msgid,&u2[1],1);
+      if(u2[1]==1){
+        digitalWrite(LED0, HIGH);
+        digitalWrite(LED1, HIGH);
+        digitalWrite(LED2, HIGH);
+        digitalWrite(LED3, HIGH);
+      }
+      else{
+        digitalWrite(LED0, LOW);
+        digitalWrite(LED1, LOW);
+        digitalWrite(LED2, LOW);
+        digitalWrite(LED3, LOW);
+      }
+        Serial.print(u);
+        Serial.print("\r\n");
+        Serial.print(u2[0]);
+        Serial.print("\r\n");
+
+      I2C_Start_Send();
+
+      int houkou;
+      if(u2[0]<0){
+        houkou=0;
+      I2C_Send_Encoder(1.0, 1.0, 1.0, 1.0);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_TL, 0.3, houkou);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_TR, 0.3, houkou);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_BL, 0.3, houkou);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_BR, 0.3, houkou);
+      }
+      else if(u2[0]>0){
+        houkou=1;
+      I2C_Send_Encoder(1.0, 1.0, 1.0, 1.0);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_TL, 0.3, houkou);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_TR, 0.3, houkou);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_BL, 0.3, houkou);
+      // delay(50);
+      I2C_Send_PWM_DIR(Motor_BR, 0.3, houkou);
+      }
+      //I2C_Start_Send();
+
+      // delay(50);
+      //I2C_End_Send();
+     // Serial.println("sent la");
+    }
+    inline void test_loop(){
     }
 
     /* PikaPika FFT test

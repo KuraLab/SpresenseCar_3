@@ -18,7 +18,7 @@
 #include <Arduino.h>
 #include <MP.h>
 
-#include <Camera.h>
+//s#include <Camera.h>
 // #include <vl53l1x.h>
 #include <Wire.h>
 

@@ -10,31 +10,32 @@
 // using namespace MAX2022;
 
 void setup(){
-    Curr_Motor_Input.M1_DIR = 1;
-    Curr_Motor_Input.M2_DIR = 1;
-    Curr_Motor_Input.M3_DIR = 1;
-    Curr_Motor_Input.M4_DIR = 1;
+    Serial_println("here");
+    //Curr_Motor_Input.M1_DIR = 1;
+    //Curr_Motor_Input.M2_DIR = 1;
+    //Curr_Motor_Input.M3_DIR = 1;
+    //Curr_Motor_Input.M4_DIR = 1;
 }
 
 void loop(){
     // I2C_Receive is needed for receiving new motor input from Spresense
-    // I2C_Receive_Routine();
+    I2C_Receive_Routine();
 
-    Curr_Motor_Input.M1_PWM = 1.0;
-    Curr_Motor_Input.M2_PWM = 1.0;
-    Curr_Motor_Input.M3_PWM = 1.0;
-    Curr_Motor_Input.M4_PWM = 1.0;
-    Motor_Apply_Input();
+    //Curr_Motor_Input.M1_PWM = 1.0;
+    //Curr_Motor_Input.M2_PWM = 1.0;
+    //Curr_Motor_Input.M3_PWM = 1.0;
+    //Curr_Motor_Input.M4_PWM = 1.0;
+    //Motor_Apply_Input();
 
-    wait_s(3);
+    //wait_s(3);
 
-    Curr_Motor_Input.M1_PWM = 0.0;
-    Curr_Motor_Input.M2_PWM = 0.0;
-    Curr_Motor_Input.M3_PWM = 0.0;
-    Curr_Motor_Input.M4_PWM = 0.0;
-    Motor_Apply_Input();
+    //Curr_Motor_Input.M1_PWM = 0.0;
+    //Curr_Motor_Input.M2_PWM = 0.0;
+    //Curr_Motor_Input.M3_PWM = 0.0;
+    //Curr_Motor_Input.M4_PWM = 0.0;
+    //Motor_Apply_Input();
 
-    wait_s(3);
+    //wait_s(3);
 }
 
 void I2C_Receive_Routine(){
