@@ -47,7 +47,7 @@ bool I2C_Send_PWM_DIR (Motor motor, float pwm, int dir){
 
     msg[12] = '0';
 
-    Serial.println(msg);
+    //Serial.println(msg);
     
     Wire.beginTransmission(NUCLEO_I2C_ADDR);
     Wire.write(msg);
@@ -186,7 +186,7 @@ bool I2C_Send_Encoder (float m1_mul, float m2_mul, float m3_mul, float m4_mul){
 
     msg[29] = '0';
 
-    Serial.println(msg);
+    //Serial.println(msg);
     
     Wire.beginTransmission(NUCLEO_I2C_ADDR);
     Wire.write(msg);

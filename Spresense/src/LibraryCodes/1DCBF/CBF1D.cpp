@@ -118,9 +118,9 @@ double* get_distance(String max_step,String min_step,String measure_step){//LiDA
 }
 
 double* One_CBF(double q1,double dq1,double q2,double dq2,double u){//入力の再設計を行う関数
-  double gamma=0.8;//CBFの制約パラメータɤ
+  double gamma=2;//CBFの制約パラメータɤ
 double dt=0.2;//時定数(delay(200)なので0.2)
-double r=600;//安全距離(mm)
+double r=200;//安全距離(mm)
   u2[1]=0;
   double forward_constrain = dq1*q1/abs(q1)-2*u*dt*q1/abs(q1)+gamma*(abs(q1)+dq1*q1/abs(q1)*dt-r);
   double behind_constrain = dq2*q2/abs(q2)-2*u*dt*q2/abs(q2)+gamma*(abs(q2)+dq2*q2/abs(q2)*dt-r);

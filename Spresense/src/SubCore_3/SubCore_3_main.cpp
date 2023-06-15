@@ -11,6 +11,7 @@
 using namespace MAX2022;
 int count[4]={0,0,0,0};
 int speed[4]={0,0,0,0};
+int8_t msgidsub3;
 uint64_t curr_time;
 uint64_t curr_time_1;
 void Count1UP(){
@@ -32,8 +33,6 @@ void setup(){
     MPLog("SubCore 3 Initialized \n");
     //---[INITIALIZATION FINISHED]----------------------------//+
     MPLog("%d \n", SUBCORE);
-
-    Serial.begin(115200);
     pinMode (PIN_D25,INPUT);
     pinMode (PIN_D26,INPUT);
     pinMode (PIN_D27,INPUT);
@@ -43,10 +42,15 @@ void setup(){
     attachInterrupt(digitalPinToInterrupt(PIN_D27), Count3UP, CHANGE);
     attachInterrupt(digitalPinToInterrupt(PIN_D28), Count4UP, CHANGE);
     // Sub3_setup();
+    int* speed_ad;
+    speed_ad= speed;
+    MP.Send(msgidsub3,speed_ad);
 }
 
 void loop(){
     // Sub3_loop();
+    int8_t msgid;
+    int ret_sub3;
     curr_time=millis();
     if(curr_time-curr_time_1>=50){
         speed[0]=80*PI*count[0]*1000/450/(curr_time-curr_time_1);
@@ -57,14 +61,6 @@ void loop(){
         count[1]=0;
         count[2]=0;
         count[3]=0;
-        Serial.print(speed[0]);
-        Serial.print(",");
-        Serial.print(speed[1]);
-        Serial.print(",");
-        Serial.print(speed[2]);
-        Serial.print(",");
-        Serial.print(speed[3]);
-        Serial.print(",\r\n");
         curr_time_1=curr_time;
     }
 }

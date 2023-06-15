@@ -23,9 +23,11 @@ void loop(){
     //Sub1_loop();
     int8_t msgid;
     int u_2;
-    int ret;
+    int ret_sub1;
+    int v_sub1;
     MP.RecvTimeout(0);
     MP.Recv(&msgid,&u_2);
+    //MP.Recv(&msgid,&v_sub1);
     //u_2=100;
     int u3[2];
     double* ptr2; 
@@ -37,8 +39,8 @@ void loop(){
     //Serial.print("\r\n");
     //Serial.print(u3[0]);
     //Serial.print("\r\n");
-    ret=MP.Send(msgid,u3[0]);
-    if(ret==0){
+    ret_sub1=MP.Send(msgid,u3[0]);
+    if(ret_sub1==0){
         MP.Send(msgid,u3[1]);
     }
 }
