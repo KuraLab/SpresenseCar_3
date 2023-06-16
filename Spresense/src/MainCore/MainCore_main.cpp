@@ -10,8 +10,8 @@
 
 using namespace MAX2022;
 int* speed_admain;
-int8_t msgid_main;
-int wheelspeed[4];
+//int8_t msgid_main;
+//int wheelspeed[4];
 
 
 inline void test_init4(){
@@ -43,12 +43,12 @@ inline void test_init4(){
       digitalWrite(LED2, LOW);
       digitalWrite(LED3, LOW);
     }
-    Serial.print(u);
-    Serial.print("\r\n");
-    Serial.print(u2[0]);
-    Serial.print("\r\n");
-    Serial.print(v);
-    Serial.print("\r\n");
+    //Serial.print(u);
+    //Serial.print("\r\n");
+    //Serial.print(u2[0]);
+    //Serial.print("\r\n");
+    //Serial.print(v);
+    //Serial.print("\r\n");
     //v=v+0.2*u2[0];
     v=300;
     if(v<0){
@@ -86,8 +86,8 @@ void setup() {
   //---[INITIALIZATION FINISHED]----------------------------//
   MainCore_setup();
   //Sub3_setup();
-  MP.RecvTimeout(0);
-  MP.Recv(&msgid_main,&speed_admain,3);
+  //MP.RecvTimeout(0);
+  //MP.Recv(&msgid_main,&speed_admain,3);
 }
 
 void loop() {
