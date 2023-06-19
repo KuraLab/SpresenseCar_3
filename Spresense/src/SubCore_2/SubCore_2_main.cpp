@@ -19,11 +19,11 @@ void setup(){
 
     MPLog("%d \n", SUBCORE);
 
-    Sub2_setup();
+    //Sub2_setup();
 }
 
 void loop(){
-    Sub2_loop();
+    //Sub2_loop();
 }
 
 #endif
