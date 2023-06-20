@@ -13,6 +13,10 @@
 
 //CBF
 #include "1DCBF/CBF1D.h"
+
+//write on SD
+//#include "SD_write/SD_write.h"
+
 //#include "1DCBF/CBF1D_asym.h"
 // Functions definitions
 #include "QOL_Func/QOL_Func.h"
