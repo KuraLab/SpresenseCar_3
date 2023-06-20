@@ -7,28 +7,45 @@
 #ifndef SUBCORE
 
 #include <IncludeLists.h>
+#include <SDHCI.h>
+#include <File.h>
 
 using namespace MAX2022;
 int* speed_admain;
+<<<<<<< HEAD
 //int8_t msgid_main;
 //int wheelspeed[4];
 
 
+=======
+int8_t msgid_main;
+double wheel_PWM[4]={0.3,0.3,0.3,0.3};
+int v=300;
+int houkou;
+SDClass SD;
+File myFile;
+int endcount=0;
+int end=0;
+>>>>>>> origin/ETCHU
 inline void test_init4(){
-    int u=10;
-    int u2[2];
-    int houkou;
-    int v=0;
-    int speed[4];
+    int u=50;
+    int u2[4];
+    int v_mean;
     int ret;
+    double feedback[4];
     int8_t msgid;
-
-    v=(*(speed_admain+0)+*(speed_admain+1)+*(speed_admain+2)+*(speed_admain+3))/4;  
-    ret = MP.Send(msgid,u,1);
-    if(ret==0){
-      MP.Send(msgid,v,1);
+    double* ptr2; 
+    v_mean=(*(speed_admain+0)+*(speed_admain+1)+*(speed_admain+2)+*(speed_admain+3))/4;  
+    ptr2= CBF1Dasym(u,v_mean,houkou);
+    for (int i = 0; i < 4; ++i) {
+        u2[i]=ptr2[i];
     }
-    //MP.RecvTimeout(0);
+   
+    //ret = MP.Send(msgid,u,1);
+    //if(ret==0){
+    //  MP.Send(msgid,v,1);
+    //}
+    ///MP.RecvTimeout(0);
     //MP.Recv(&msgid,&u2[0],1);
     //MP.Recv(&msgid,&u2[1],1);
     if(u2[1]==1){
@@ -43,6 +60,7 @@ inline void test_init4(){
       digitalWrite(LED2, LOW);
       digitalWrite(LED3, LOW);
     }
+<<<<<<< HEAD
     //Serial.print(u);
     //Serial.print("\r\n");
     //Serial.print(u2[0]);
@@ -51,6 +69,37 @@ inline void test_init4(){
     //Serial.print("\r\n");
     //v=v+0.2*u2[0];
     v=300;
+=======
+    /*Serial.print(u);
+    Serial.print(",");
+    Serial.print(u2[0]);
+    Serial.print(",");
+    Serial.print(u2[2]);
+    Serial.print(",");
+    Serial.print(u2[3]);
+    Serial.print("\r\n");
+    Serial.print(wheel_PWM[0]);
+    Serial.print(",");
+    Serial.print(wheel_PWM[1]);
+    Serial.print(",");
+    Serial.print(wheel_PWM[2]);
+    Serial.print(",");
+    Serial.print(wheel_PWM[3]);
+    Serial.print("\r\n");
+    Serial.print(*(speed_admain+0)-v);
+    Serial.print(",");
+    Serial.print(*(speed_admain+1)-v);
+    Serial.print(",");
+    Serial.print(*(speed_admain+2)-v);
+    Serial.print(",");
+    Serial.print(*(speed_admain+3)-v);
+    Serial.print("\r\n");
+    Serial.print(v_mean);
+    Serial.print(",");
+    Serial.print(v);
+    Serial.print("\r\n");*/
+    v=v+0.1*u2[0];
+>>>>>>> origin/ETCHU
     if(v<0){
       houkou=0;
     }
@@ -59,18 +108,61 @@ inline void test_init4(){
     }
     
     I2C_Start_Send();
-    //for (int i = 0; i < 1; i++){
-      //wheelspeed[0]+=(abs(v)-*speed_admain)/1000;
-      //wheelspeed[1]+=(abs(v)-*(speed_admain+1))/1000;
-      //wheelspeed[2]+=(abs(v)-*(speed_admain+2))/1000;
-      //wheelspeed[3]+=(abs(v)-*(speed_admain+3))/1000;
-      I2C_Send_Encoder(1.0, 1.0, 1.0, 1.0);
-      I2C_Send_PWM_DIR(Motor_TL, 0.3, houkou);
-      I2C_Send_PWM_DIR(Motor_TR, 0.3, houkou);
-      I2C_Send_PWM_DIR(Motor_BL, 0.3, houkou);
-      I2C_Send_PWM_DIR(Motor_BR, 0.3, houkou);
-      delay(50);
-      //}
+    if(end==1){
+      I2C_Send_Encoder(0.0, 0.0, 0.0, 0.0);
+    }
+    else{
+      for (int i = 0; i < 20; i++){
+        feedback[0]=abs(v)-*speed_admain;
+        feedback[1]=abs(v)-*(speed_admain+1);
+        feedback[2]=abs(v)-*(speed_admain+2);
+        feedback[3]=abs(v)-*(speed_admain+3);
+        wheel_PWM[0]+=feedback[0]/4000;
+        wheel_PWM[1]+=feedback[1]/4000;
+        wheel_PWM[2]+=feedback[2]/4000;
+        wheel_PWM[3]+=feedback[3]/4000;
+        I2C_Send_Encoder(1.0, 1.0, 1.0, 1.0);
+        for(int i = 0; i < 4; i++){
+          if(wheel_PWM[i]>1.0){
+            wheel_PWM[i]=1.0;
+          }
+          else if(wheel_PWM[i]<0.0){
+            wheel_PWM[i]=0.0;
+            I2C_Send_Encoder(0.0, 0.0, 0.0, 0.0);
+          }
+        }
+      
+        I2C_Send_PWM_DIR(Motor_TL, abs(wheel_PWM[0]), houkou);
+        I2C_Send_PWM_DIR(Motor_TR, abs(wheel_PWM[1]), houkou);
+        I2C_Send_PWM_DIR(Motor_BL, abs(wheel_PWM[2]), houkou);
+        I2C_Send_PWM_DIR(Motor_BR, abs(wheel_PWM[3]), houkou);
+        }
+    }
+    if(*(speed_admain+0)<10 && *(speed_admain+1)<10 && *(speed_admain+2)<10 && *(speed_admain+3)<10){
+      endcount +=1;
+    }
+    else{
+      endcount=0;
+    }
+    if(endcount>=2+0){
+      end=1;
+    }
+    
+    myFile = SD.open("Lidar/350-2mm.txt", FILE_WRITE);
+    if (myFile && !(end==1)) {
+    //Serial.print("Writing to test_ground.txt...");
+    myFile.printf("%d,%d\r\n", u2[2],u2[3]);
+    //myFile.println(speed[1]);
+    //myFile.println(speed[2]);
+    //myFile.println(speed[3]);
+    //Close the file 
+    myFile.close();
+    //Serial.println("done.");
+    }
+  else {
+    //If the file didn't open, print an error 
+    //Serial.println("error opening test_ground.txt");
+  }
     }
 
 
@@ -86,8 +178,26 @@ void setup() {
   //---[INITIALIZATION FINISHED]----------------------------//
   MainCore_setup();
   //Sub3_setup();
+<<<<<<< HEAD
   //MP.RecvTimeout(0);
   //MP.Recv(&msgid_main,&speed_admain,3);
+=======
+  Serial2.begin(115200);
+  while (!Serial) {
+   ; /* wait for serial port to connect. Needed for native USB port only */
+  }
+  /* Initialize SD */
+  Serial.print("Insert SD card.");
+  //while (!SD.begin()) {
+   //; /* wait until SD card is mounted. */
+  //}
+  /* Create a new directory */
+  SD.mkdir("Lidar/");
+  MP.RecvTimeout(0);
+  MP.Recv(&msgid_main,&speed_admain,1);
+  myFile.printf("------------\r\n");
+
+>>>>>>> origin/ETCHU
 }
 
 void loop() {

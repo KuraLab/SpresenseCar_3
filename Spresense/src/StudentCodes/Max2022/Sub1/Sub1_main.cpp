@@ -61,6 +61,30 @@ namespace MAX2022
             break;
         }
     }
+    void Sub1_loop2(void){
+        int8_t msgid;
+        int u_2;
+        int ret_sub1;
+        int v_sub1;
+        MP.RecvTimeout(0);
+        MP.Recv(&msgid,&u_2);
+        //MP.Recv(&msgid,&v_sub1);
+        //u_2=100;
+        int u3[2];
+        double* ptr2; 
+        //ptr2= CBF1Dasym(u_2,v_sub1);
+        for (int i = 0; i < 2; ++i) {
+            u3[i]=ptr2[i];
+        }
+        //Serial.print(u_2);
+        //Serial.print("\r\n");
+        //Serial.print(u3[0]);
+        //Serial.print("\r\n");
+        ret_sub1=MP.Send(msgid,u3[0]);
+        if(ret_sub1==0){
+            MP.Send(msgid,u3[1]);
+        }
+    }
 }
 
 #endif
