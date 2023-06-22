@@ -4,8 +4,11 @@
 #include "arduino.h"
 
 //----設定パラメータ---------------------
-String min_step="0084";//観測開始方向
-String max_step="0602";//観測終了方向 
+//String min_step="0085";//観測開始方向
+//String max_step="0603";//観測終了方向 
+//青
+String min_step="0118";//観測開始方向
+String max_step="0636";//観測終了方向 
 String skip_step="16";//間引く方向数
 
 //-------------------------------------
@@ -15,7 +18,7 @@ int timer3=0;
 double distance_1[1536];//1ステップ前の観測データ
 double distance_r[3072];
 double distance_xy[3072];//座標変換後の観測データ
-double u2[2];
+double u2[4];
 double u4[4];
 
 double* get_distance(String max_step,String min_step,String measure_step){//LiDARからのデータ受信、座標変換を行う
@@ -117,7 +120,7 @@ double* get_distance(String max_step,String min_step,String measure_step){//LiDA
  return distance_r;
 }
 
-double* One_CBF(double q1,double dq1,double q2,double dq2,double u){//入力の再設計を行う関数
+double* One_CBF(double q1,double dq1,double q2,double dq2,double u,double houkou){//入力の再設計を行う関数
   double gamma=2;//CBFの制約パラメータɤ
   double dt=0.2;//時定数(delay(200)なので0.2)
   
@@ -138,16 +141,27 @@ double* One_CBF(double q1,double dq1,double q2,double dq2,double u){//入力の�
     u2[0]=0;
     u2[1]=1;
   }
+  u2[2]=(dq1*q1/abs(q1)+gamma*(abs(q1)+dq1*q1/abs(q1)*dt-r))/(2*dt*q1/abs(q1));
+  u2[3]=(dq2*q2/abs(q2)+gamma*(abs(q2)+dq2*q2/abs(q2)*dt-r))/(2*dt*q2/abs(q2));
   return u2;
 }
 
 double* One_CBFasym(double q1,double dq1,double q2,double dq2,double u,double v,double houkou){//入力の再設計を行う関数
+<<<<<<< HEAD
   double gamma=0.8;//CBFの制約パラメータɤ
   double dt=0.1;//時定数(delay(200)なので0.2)
   double r=350;//安全距離(mm)
   if(houkou==0){
     v=-v;
   }
+=======
+  double gamma=0.5;//CBFの制約パラメータɤ
+double dt=0.1;//時定数(delay(200)なので0.2)
+double r=400;//安全距離(mm)
+if(houkou==0){
+  v=-v;
+}
+>>>>>>> origin/ETCHU
   u2[1]=0;
   double forward_constrain = -2*v*q1/abs(q1)-2*u*dt*q1/abs(q1)+gamma*(abs(q1)-2*v*q1*dt/abs(q1)-r);
   double behind_constrain =  -2*v*q2/abs(q2)-2*u*dt*q2/abs(q2)+gamma*(abs(q2)-2*v*q2*dt/abs(q2)-r);
@@ -164,18 +178,20 @@ double* One_CBFasym(double q1,double dq1,double q2,double dq2,double u,double v,
     u2[0]=-(gamma+1/dt)*dq1;
     u2[1]=1;
   }
+  u2[2]=(-2*v*q1/abs(q1)+gamma*(abs(q1)-2*v*q1/abs(q1)*dt-r))/(2*dt*q1/abs(q1));
+  u2[3]=(-2*v*q2/abs(q2)+gamma*(abs(q2)-2*v*q2/abs(q2)*dt-r))/(2*dt*q2/abs(q2));
   return u2;
 }
 
-double* CBF1D(double u){
+double* CBF1D(double u,double houkou){
   double* ptr;
   double* ptr2;
   ptr= get_distance(max_step, min_step,skip_step);   
   for (int i = 0; i < 3072; ++i) {
     distance_xy[i]=ptr[i];
   }
-  ptr2= One_CBF(distance_xy[min_step.toInt()],distance_xy[min_step.toInt()+1536],distance_xy[min_step.toInt()+512],distance_xy[min_step.toInt()+2048],u);
-  for (int i = 0; i < 2; ++i) {
+  ptr2= One_CBF(distance_xy[min_step.toInt()],distance_xy[min_step.toInt()+1536],distance_xy[min_step.toInt()+512],distance_xy[min_step.toInt()+2048],u,houkou);
+  for (int i = 0; i < 4; ++i) {
     u4[i]=ptr2[i];
   }
   return u4;
@@ -188,10 +204,8 @@ double* CBF1Dasym(double u,double v,double houkou){
     distance_xy[i]=ptr[i];
   }
   ptr2= One_CBFasym(distance_xy[min_step.toInt()],distance_xy[min_step.toInt()+1536],distance_xy[min_step.toInt()+512],distance_xy[min_step.toInt()+2048],u,v,houkou);
-  for (int i = 0; i < 2; ++i) {
+  for (int i = 0; i < 4; ++i) {
     u4[i]=ptr2[i];
   }
-  u4[2]=distance_xy[min_step.toInt()];
-  u4[3]=distance_xy[min_step.toInt()+512];
   return u4;
 }

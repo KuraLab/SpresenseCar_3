@@ -13,15 +13,22 @@
 using namespace MAX2022;
 int* speed_admain;
 int8_t msgid_main;
+<<<<<<< HEAD
 double wheel_PWM[4]={0.8,0.8,0.8,0.8};
 int v=300;
+=======
+double wheel_PWM[4]={0.3,0.3,0.3,0.3};
+//int v=300;
+int v=0;
+>>>>>>> origin/ETCHU
 int houkou;
 SDClass SD;
 File myFile;
 int endcount=0;
 int end=0;
 inline void test_init4(){
-    int u=50;
+    //int u=50;
+    int u=0;
     int u2[4];
     int v_mean;
     int ret;
@@ -129,11 +136,15 @@ inline void test_init4(){
     else{
       endcount=0;
     }
-    if(endcount>=2+0){
+    if(endcount>=100){
       end=1;
     }
     
+<<<<<<< HEAD
     myFile = SD.open("0622/1.txt", FILE_WRITE);
+=======
+    myFile = SD.open("Lidar/350-3mm.txt", FILE_WRITE);
+>>>>>>> origin/ETCHU
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
     myFile.printf("%d,%d\r\n", u2[2],u2[3]); //+前，―後ろの距離
@@ -176,8 +187,12 @@ void setup() {
   SD.mkdir("0622/");
   MP.RecvTimeout(0);
   MP.Recv(&msgid_main,&speed_admain,1);
+  myFile = SD.open("Lidar/350-3mm.txt", FILE_WRITE);
+  if (myFile && !(end==1)) {
   myFile.printf("------------\r\n");
-
+  myFile.close();
+  }
+  delay(50);
 }
 
 void loop() {
