@@ -13,7 +13,7 @@
 using namespace MAX2022;
 int* speed_admain;
 int8_t msgid_main;
-double wheel_PWM[4]={0.3,0.3,0.3,0.3};
+double wheel_PWM[4]={0.8,0.8,0.8,0.8};
 int v=300;
 int houkou;
 SDClass SD;
@@ -95,7 +95,7 @@ inline void test_init4(){
     }
     else{
       for (int i = 0; i < 20; i++){
-        feedback[0]=abs(v)-*speed_admain;
+        /*feedback[0]=abs(v)-*speed_admain;
         feedback[1]=abs(v)-*(speed_admain+1);
         feedback[2]=abs(v)-*(speed_admain+2);
         feedback[3]=abs(v)-*(speed_admain+3);
@@ -112,8 +112,11 @@ inline void test_init4(){
             wheel_PWM[i]=0.0;
             I2C_Send_Encoder(0.0, 0.0, 0.0, 0.0);
           }
-        }
-      
+        }*/
+        wheel_PWM[0] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+        wheel_PWM[1] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+        wheel_PWM[2] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+        wheel_PWM[3] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
         I2C_Send_PWM_DIR(Motor_TL, abs(wheel_PWM[0]), houkou);
         I2C_Send_PWM_DIR(Motor_TR, abs(wheel_PWM[1]), houkou);
         I2C_Send_PWM_DIR(Motor_BL, abs(wheel_PWM[2]), houkou);
@@ -130,7 +133,7 @@ inline void test_init4(){
       end=1;
     }
     
-    myFile = SD.open("0620/2.txt", FILE_WRITE);
+    myFile = SD.open("0622/1.txt", FILE_WRITE);
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
     myFile.printf("%d,%d\r\n", u2[2],u2[3]); //+前，―後ろの距離
@@ -145,7 +148,7 @@ inline void test_init4(){
     //If the file didn't open, print an error 
     //Serial.println("error opening test_ground.txt");
   }
-    }
+}
 
 
 void setup() {
@@ -170,7 +173,7 @@ void setup() {
   ; /* wait until SD card is mounted. */
   }
   /* Create a new directory */
-  SD.mkdir("0620/");
+  SD.mkdir("0622/");
   MP.RecvTimeout(0);
   MP.Recv(&msgid_main,&speed_admain,1);
   myFile.printf("------------\r\n");
