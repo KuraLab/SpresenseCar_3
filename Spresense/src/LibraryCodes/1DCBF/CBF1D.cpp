@@ -41,7 +41,7 @@ double* get_distance(String max_step,String min_step,String measure_step){//LiDA
    val[count]= Serial2.read();  
    count=count+1;
   }  
-  //delay(50);
+  delay(5);
   //Serial.print(val);
   for (int d = 0; d<4; d++){//タイムスタンプのデコード
     timer = val[index3]-0x30;

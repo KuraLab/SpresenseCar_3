@@ -36,6 +36,7 @@ inline void test_init4(){
     double* ptr2; 
     v_mean=(*(speed_admain+0)+*(speed_admain+1)+*(speed_admain+2)+*(speed_admain+3))/4;  
     ptr2= CBF1Dasym(u,v_mean,houkou);
+    //ptr2= CBF1D(u,houkou);
     for (int i = 0; i < 4; ++i) {
         u2[i]=ptr2[i];
     }
@@ -102,8 +103,8 @@ inline void test_init4(){
       I2C_Send_Encoder(0.0, 0.0, 0.0, 0.0);
     }
     else{
-      for (int i = 0; i < 20; i++){
-        /*feedback[0]=abs(v)-*speed_admain;
+      for (int i = 0; i < 19; i++){
+        feedback[0]=abs(v)-*speed_admain;
         feedback[1]=abs(v)-*(speed_admain+1);
         feedback[2]=abs(v)-*(speed_admain+2);
         feedback[3]=abs(v)-*(speed_admain+3);
@@ -120,12 +121,6 @@ inline void test_init4(){
             wheel_PWM[i]=0.0;
             I2C_Send_Encoder(0.0, 0.0, 0.0, 0.0);
           }
-        }*/
-        if(450>=abs(v) && abs(v)>=222){
-          wheel_PWM[0] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
-          wheel_PWM[1] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
-          wheel_PWM[2] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
-          wheel_PWM[3] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
         }
       
         I2C_Send_PWM_DIR(Motor_TL, abs(wheel_PWM[0]), houkou);
@@ -144,7 +139,7 @@ inline void test_init4(){
       end=1;
     }
     
-    myFile = SD.open(dirname + "/" + filename + ".txt", FILE_WRITE);
+    myFile = SD.open("Lidar/350-4mm.txt", FILE_WRITE);
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
     myFile.printf("%d,%d\r\n", u2[2],u2[3]);
@@ -193,7 +188,8 @@ void setup() {
     myFile.printf("------------\r\n");
     myFile.close();
   }
-  delay(50);
+  Serial2.write("MD0118063616001\r\n");
+  delay(100);
 }
 
 void loop() {
