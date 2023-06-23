@@ -44,7 +44,6 @@ void setup(){
     int* speed_ad;
     speed_ad= speed;
     MP.Send(msgidsub3,speed_ad);
-    Serial.begin(115200);
 }
 
 void loop(){

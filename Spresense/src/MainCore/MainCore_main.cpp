@@ -14,16 +14,16 @@ using namespace MAX2022;
 int* speed_admain;
 int8_t msgid_main;
 double wheel_PWM[4]={0.3,0.3,0.3,0.3};
-//int v=300;
-int v=0;
+int v=300;
+//int v=0;
 int houkou;
 SDClass SD;
 File myFile;
 int endcount=0;
 int end=0;
 inline void test_init4(){
-    //int u=50;
-    int u=0;
+    int u=50;
+    //int u=0;
     int u2[4];
     int v_mean;
     int ret;
@@ -32,6 +32,7 @@ inline void test_init4(){
     double* ptr2; 
     v_mean=(*(speed_admain+0)+*(speed_admain+1)+*(speed_admain+2)+*(speed_admain+3))/4;  
     ptr2= CBF1Dasym(u,v_mean,houkou);
+    //ptr2= CBF1D(u,houkou);
     for (int i = 0; i < 4; ++i) {
         u2[i]=ptr2[i];
     }
@@ -96,7 +97,7 @@ inline void test_init4(){
       I2C_Send_Encoder(0.0, 0.0, 0.0, 0.0);
     }
     else{
-      for (int i = 0; i < 20; i++){
+      for (int i = 0; i < 19; i++){
         feedback[0]=abs(v)-*speed_admain;
         feedback[1]=abs(v)-*(speed_admain+1);
         feedback[2]=abs(v)-*(speed_admain+2);
@@ -132,7 +133,7 @@ inline void test_init4(){
       end=1;
     }
     
-    myFile = SD.open("Lidar/350-3mm.txt", FILE_WRITE);
+    myFile = SD.open("Lidar/350-4mm.txt", FILE_WRITE);
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
     myFile.printf("%d,%d\r\n", u2[2],u2[3]);
@@ -167,7 +168,7 @@ void setup() {
    ; /* wait for serial port to connect. Needed for native USB port only */
   }
   /* Initialize SD */
-  Serial.print("Insert SD card.");
+  Serial.print("Insert SD card.\r\n");
   //while (!SD.begin()) {
    //; /* wait until SD card is mounted. */
   //}
@@ -175,12 +176,13 @@ void setup() {
   SD.mkdir("Lidar/");
   MP.RecvTimeout(0);
   MP.Recv(&msgid_main,&speed_admain,1);
-  myFile = SD.open("Lidar/350-3mm.txt", FILE_WRITE);
+  myFile = SD.open("Lidar/350-4mm.txt", FILE_WRITE);
   if (myFile && !(end==1)) {
   myFile.printf("------------\r\n");
   myFile.close();
   }
-  delay(50);
+  Serial2.write("MD0118063616001\r\n");
+  delay(100);
 }
 
 void loop() {
