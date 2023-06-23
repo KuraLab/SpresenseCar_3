@@ -13,14 +13,9 @@
 using namespace MAX2022;
 int* speed_admain;
 int8_t msgid_main;
-<<<<<<< HEAD
-double wheel_PWM[4]={0.8,0.8,0.8,0.8};
-int v=300;
-=======
 double wheel_PWM[4]={0.3,0.3,0.3,0.3};
 //int v=300;
 int v=0;
->>>>>>> origin/ETCHU
 int houkou;
 SDClass SD;
 File myFile;
@@ -140,11 +135,7 @@ inline void test_init4(){
       end=1;
     }
     
-<<<<<<< HEAD
-    myFile = SD.open("0622/1.txt", FILE_WRITE);
-=======
     myFile = SD.open("Lidar/350-3mm.txt", FILE_WRITE);
->>>>>>> origin/ETCHU
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
     myFile.printf("%d,%d\r\n", u2[2],u2[3]); //+前，―後ろの距離

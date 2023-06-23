@@ -147,21 +147,12 @@ double* One_CBF(double q1,double dq1,double q2,double dq2,double u,double houkou
 }
 
 double* One_CBFasym(double q1,double dq1,double q2,double dq2,double u,double v,double houkou){//入力の再設計を行う関数
-<<<<<<< HEAD
-  double gamma=0.8;//CBFの制約パラメータɤ
-  double dt=0.1;//時定数(delay(200)なので0.2)
-  double r=350;//安全距離(mm)
-  if(houkou==0){
-    v=-v;
-  }
-=======
   double gamma=0.5;//CBFの制約パラメータɤ
 double dt=0.1;//時定数(delay(200)なので0.2)
 double r=400;//安全距離(mm)
 if(houkou==0){
   v=-v;
 }
->>>>>>> origin/ETCHU
   u2[1]=0;
   double forward_constrain = -2*v*q1/abs(q1)-2*u*dt*q1/abs(q1)+gamma*(abs(q1)-2*v*q1*dt/abs(q1)-r);
   double behind_constrain =  -2*v*q2/abs(q2)-2*u*dt*q2/abs(q2)+gamma*(abs(q2)-2*v*q2*dt/abs(q2)-r);
