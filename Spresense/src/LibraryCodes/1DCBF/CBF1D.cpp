@@ -44,21 +44,21 @@ double* get_distance(String max_step,String min_step,String measure_step){//LiDA
   //delay(50);
   //Serial.print(val);
   for (int d = 0; d<4; d++){//タイムスタンプのデコード
-        timer = val[index3]-0x30;
-        x=6*(3-d);
-        while (timer != 0){
-            r += ( timer % 2 == 0 ? "0" : "1" );
-            timer /= 2;
-        }
-        for (int c =0; c<6;c++){
-          if(r[c]=='1'){
-              timer2=timer2+std::pow(2, x);
-          }
-          x=x+1;
-        }
-        r="";
-        index3=index3+1;
+    timer = val[index3]-0x30;
+    x=6*(3-d);
+    while (timer != 0){
+      r += ( timer % 2 == 0 ? "0" : "1" );
+      timer /= 2;
     }
+    for (int c =0; c<6;c++){
+      if(r[c]=='1'){
+        timer2=timer2+std::pow(2, x);
+      }
+      x=x+1;
+    }
+    r="";
+    index3=index3+1;
+  }
   for (int step = 0; step<NUMBER_OF_STEP; step++){//距離データのデコード
     if (step < start_step || step > stop_step){//観測範囲外のデータを65535に
       distance[step] = 65535;
@@ -71,16 +71,16 @@ double* get_distance(String max_step,String min_step,String measure_step){//LiDA
     int32_t dist = 0;
     int dist2 = 0;
     for (int d = 0; d<3; d++){
-     dist = val[index]-0x30;
-     x=6*(2-d);
-     while (dist != 0){
-      r += ( dist % 2 == 0 ? "0" : "1" );
-      dist /= 2;
-     }
-     for (int c =0; c<6;c++){
-      if(r[c]=='1'){
-        dist2=dist2+std::pow(2, x);
+      dist = val[index]-0x30;
+      x=6*(2-d);
+      while (dist != 0){
+        r += ( dist % 2 == 0 ? "0" : "1" );
+        dist /= 2;
       }
+      for (int c =0; c<6;c++){
+        if(r[c]=='1'){
+          dist2=dist2+std::pow(2, x);
+        }
       x=x+1;
       }
       r="";
@@ -94,29 +94,29 @@ double* get_distance(String max_step,String min_step,String measure_step){//LiDA
         index++;
         index2 = 0;
       }
+    }
+    distance[step] = (double)dist2;
+    if(distance[step] == 0){//観測できていない方向のデータを65535に
+      distance[step] = 65535;
+    }
   }
-      distance[step] = (double)dist2;
-      if(distance[step] == 0){//観測できていない方向のデータを65535に
-        distance[step] = 65535;
-      }
- }
  for (int step = 0; step<NUMBER_OF_STEP; step++){//相対速度のデータ作成
     if (distance_1[step]==65535){
       distance[step+768] = 0;
       continue;
     }
     distance[step+768]=1000*(distance[step]-distance_1[step])/(timer2-timer3);
- }
+  }
  for (int step = 0; step<NUMBER_OF_STEP*2; step++){
- distance_1[step]=distance[step];
- }
+    distance_1[step]=distance[step];
+  }
  timer3=timer2;
  for (int step = 0; step<NUMBER_OF_STEP; step++){//座標変換 (596ステップ目をx軸方向に)
- distance_r[step]=distance[step]*cos((step-596)*2*M_PI/1024);
- distance_r[step+768]=distance[step]*sin((step-596)*2*M_PI/1024);
- distance_r[step+768*2]=distance[step+768]*cos((step-596)*2*M_PI/1024);
- distance_r[step+768*3]=distance[step+768]*sin((step-596)*2*M_PI/1024);
- }
+    distance_r[step]=distance[step]*cos((step-596)*2*M_PI/1024);
+    distance_r[step+768]=distance[step]*sin((step-596)*2*M_PI/1024);
+    distance_r[step+768*2]=distance[step+768]*cos((step-596)*2*M_PI/1024);
+    distance_r[step+768*3]=distance[step+768]*sin((step-596)*2*M_PI/1024);
+  }
  return distance_r;
 }
 
@@ -148,11 +148,11 @@ double* One_CBF(double q1,double dq1,double q2,double dq2,double u,double houkou
 
 double* One_CBFasym(double q1,double dq1,double q2,double dq2,double u,double v,double houkou){//入力の再設計を行う関数
   double gamma=0.5;//CBFの制約パラメータɤ
-double dt=0.1;//時定数(delay(200)なので0.2)
-double r=400;//安全距離(mm)
-if(houkou==0){
-  v=-v;
-}
+  double dt=0.1;//時定数(delay(200)なので0.2)
+  double r=400;//安全距離(mm)
+  if(houkou==0){
+    v=-v;
+  }
   u2[1]=0;
   double forward_constrain = -2*v*q1/abs(q1)-2*u*dt*q1/abs(q1)+gamma*(abs(q1)-2*v*q1*dt/abs(q1)-r);
   double behind_constrain =  -2*v*q2/abs(q2)-2*u*dt*q2/abs(q2)+gamma*(abs(q2)-2*v*q2*dt/abs(q2)-r);

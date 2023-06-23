@@ -21,9 +21,13 @@ SDClass SD;
 File myFile;
 int endcount=0;
 int end=0;
+
+String dirname = "CBF_asym";
+String filename = "0623-1";
+
 inline void test_init4(){
-    //int u=50;
-    int u=0;
+    int u=50;
+    //int u=0;
     int u2[4];
     int v_mean;
     int ret;
@@ -84,6 +88,8 @@ inline void test_init4(){
     Serial.print(v);
     Serial.print("\r\n");*/
     v=v+0.1*u2[0];
+
+    Serial.println(v);
     if(v<0){
       houkou=0;
     }
@@ -115,10 +121,30 @@ inline void test_init4(){
             I2C_Send_Encoder(0.0, 0.0, 0.0, 0.0);
           }
         }*/
-        wheel_PWM[0] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+        if(450>=abs(v) && abs(v)>=222){
+          wheel_PWM[0] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+          wheel_PWM[1] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+          wheel_PWM[2] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+          wheel_PWM[3] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+        }
+        else if (450<abs(v))
+        {
+          wheel_PWM[0] = 1;
+          wheel_PWM[1] = 1;
+          wheel_PWM[2] = 1;
+          wheel_PWM[3] = 1;
+        }
+        
+        else{
+          wheel_PWM[0] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
+          wheel_PWM[1] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
+          wheel_PWM[2] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
+          wheel_PWM[3] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
+        }
+        /*wheel_PWM[0] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
         wheel_PWM[1] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
         wheel_PWM[2] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
-        wheel_PWM[3] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
+        wheel_PWM[3] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);*/
         I2C_Send_PWM_DIR(Motor_TL, abs(wheel_PWM[0]), houkou);
         I2C_Send_PWM_DIR(Motor_TR, abs(wheel_PWM[1]), houkou);
         I2C_Send_PWM_DIR(Motor_BL, abs(wheel_PWM[2]), houkou);
@@ -135,7 +161,7 @@ inline void test_init4(){
       end=1;
     }
     
-    myFile = SD.open("Lidar/350-3mm.txt", FILE_WRITE);
+    myFile = SD.open(dirname + "/" + filename + ".txt", FILE_WRITE);
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
     myFile.printf("%d,%d\r\n", u2[2],u2[3]); //+前，―後ろの距離
@@ -155,6 +181,7 @@ inline void test_init4(){
 
 void setup() {
   //---[INITIALIZATION USE]---------------------------------//
+  // DO NOT DELE
   // DO NOT DELETE THE FOLLOWING CODES
   // -> Put your custom handler for PikaPika Interrupts here, leave it empty if you are not using PikaPika
   //PIKAPIKA_Set_Custom_Handler();
@@ -172,16 +199,16 @@ void setup() {
   /* Initialize SD */
   Serial.print("Insert SD card.");
   while (!SD.begin()) {
-  ; /* wait until SD card is mounted. */
+   ; /* wait until SD card is mounted. */
   }
   /* Create a new directory */
-  SD.mkdir("0622/");
+  SD.mkdir(dirname + "/");
   MP.RecvTimeout(0);
   MP.Recv(&msgid_main,&speed_admain,1);
-  myFile = SD.open("Lidar/350-3mm.txt", FILE_WRITE);
+  myFile = SD.open(dirname + "/"+filename + ".txt", FILE_WRITE);
   if (myFile && !(end==1)) {
-  myFile.printf("------------\r\n");
-  myFile.close();
+    myFile.printf("------------\r\n");
+    myFile.close();
   }
   delay(50);
 }
