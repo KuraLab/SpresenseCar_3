@@ -14,8 +14,8 @@ using namespace MAX2022;
 int* speed_admain;
 int8_t msgid_main;
 double wheel_PWM[4]={0.3,0.3,0.3,0.3};
-//int v=300;
-int v=0;
+int v=300;
+//int v=0;
 int houkou;
 SDClass SD;
 File myFile;
@@ -37,7 +37,7 @@ inline void test_init4(){
     v_mean=(*(speed_admain+0)+*(speed_admain+1)+*(speed_admain+2)+*(speed_admain+3))/4;  
     ptr2= CBF1Dasym(u,v_mean,houkou);
     for (int i = 0; i < 4; ++i) {
-      u2[i]=ptr2[i];
+        u2[i]=ptr2[i];
     }
    
     //ret = MP.Send(msgid,u,1);
@@ -59,15 +59,15 @@ inline void test_init4(){
       digitalWrite(LED2, LOW);
       digitalWrite(LED3, LOW);
     }
-    /*Serial.print(u);//nominal入力
+    Serial.print(u);
     Serial.print(",");
-    Serial.print(u2[0]);//再設計入力
-    Serial.print(",");*/
-    /*Serial.print(u2[2]);//u2[2],u2[3]は前後方距離
+    Serial.print(u2[0]);
+    Serial.print(",");
+    Serial.print(u2[2]);
     Serial.print(",");
     Serial.print(u2[3]);
-    Serial.print("\r\n");*/
-    /*Serial.print(wheel_PWM[0]);
+    Serial.print("\r\n");
+    Serial.print(wheel_PWM[0]);
     Serial.print(",");
     Serial.print(wheel_PWM[1]);
     Serial.print(",");
@@ -75,7 +75,7 @@ inline void test_init4(){
     Serial.print(",");
     Serial.print(wheel_PWM[3]);
     Serial.print("\r\n");
-    Serial.print(*(speed_admain+0)-v);//speed_admain エンコーダーの速度値
+    Serial.print(*(speed_admain+0)-v);
     Serial.print(",");
     Serial.print(*(speed_admain+1)-v);
     Serial.print(",");
@@ -86,7 +86,7 @@ inline void test_init4(){
     Serial.print(v_mean);
     Serial.print(",");
     Serial.print(v);
-    Serial.print("\r\n");*/
+    Serial.print("\r\n");
     v=v+0.1*u2[0];
 
     Serial.println(v);
@@ -107,7 +107,7 @@ inline void test_init4(){
         feedback[1]=abs(v)-*(speed_admain+1);
         feedback[2]=abs(v)-*(speed_admain+2);
         feedback[3]=abs(v)-*(speed_admain+3);
-        wheel_PWM[0]+=feedback[0]/4000; //ゲイン4000
+        wheel_PWM[0]+=feedback[0]/4000;
         wheel_PWM[1]+=feedback[1]/4000;
         wheel_PWM[2]+=feedback[2]/4000;
         wheel_PWM[3]+=feedback[3]/4000;
@@ -127,29 +127,12 @@ inline void test_init4(){
           wheel_PWM[2] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
           wheel_PWM[3] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
         }
-        else if (450<abs(v))
-        {
-          wheel_PWM[0] = 1;
-          wheel_PWM[1] = 1;
-          wheel_PWM[2] = 1;
-          wheel_PWM[3] = 1;
-        }
-        
-        else{
-          wheel_PWM[0] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
-          wheel_PWM[1] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
-          wheel_PWM[2] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
-          wheel_PWM[3] = (3.2*pow(10,-6))*pow(abs(v),2) + 1.8657*0.0001*abs(v);
-        }
-        /*wheel_PWM[0] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
-        wheel_PWM[1] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
-        wheel_PWM[2] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);
-        wheel_PWM[3] = (1.0824*pow(10,-7))*pow(abs(v),3) + ((-9.0341)*pow(10,-5))*pow(abs(v),2) + 0.0259*abs(v) + (-2.2889);*/
+      
         I2C_Send_PWM_DIR(Motor_TL, abs(wheel_PWM[0]), houkou);
         I2C_Send_PWM_DIR(Motor_TR, abs(wheel_PWM[1]), houkou);
         I2C_Send_PWM_DIR(Motor_BL, abs(wheel_PWM[2]), houkou);
         I2C_Send_PWM_DIR(Motor_BR, abs(wheel_PWM[3]), houkou);
-      }
+        }
     }
     if(*(speed_admain+0)<10 && *(speed_admain+1)<10 && *(speed_admain+2)<10 && *(speed_admain+3)<10){
       endcount +=1;
@@ -164,7 +147,7 @@ inline void test_init4(){
     myFile = SD.open(dirname + "/" + filename + ".txt", FILE_WRITE);
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
-    myFile.printf("%d,%d\r\n", u2[2],u2[3]); //+前，―後ろの距離
+    myFile.printf("%d,%d\r\n", u2[2],u2[3]);
     //myFile.println(speed[1]);
     //myFile.println(speed[2]);
     //myFile.println(speed[3]);
@@ -176,7 +159,7 @@ inline void test_init4(){
     //If the file didn't open, print an error 
     //Serial.println("error opening test_ground.txt");
   }
-}
+    }
 
 
 void setup() {
