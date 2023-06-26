@@ -14,16 +14,18 @@ using namespace MAX2022;
 int* speed_admain;
 int8_t msgid_main;
 double wheel_PWM[4]={0.3,0.3,0.3,0.3};
-int v=300;
-//int v=0;
+String dirname="CBF_ASYM";
+String filename="20230626";
+//int v=300;
+int v=0;
 int houkou;
 SDClass SD;
 File myFile;
 int endcount=0;
 int end=0;
 inline void test_init4(){
-    int u=50;
-    //int u=0;
+    //int u=50;
+    int u=0;
     int u2[4];
     int v_mean;
     int ret;
@@ -32,6 +34,7 @@ inline void test_init4(){
     double* ptr2; 
     v_mean=(*(speed_admain+0)+*(speed_admain+1)+*(speed_admain+2)+*(speed_admain+3))/4;  
     ptr2= CBF1Dasym(u,v_mean,houkou);
+    //ptr2= CBF1Dsym2(u,v_mean,houkou);
     //ptr2= CBF1D(u,houkou);
     for (int i = 0; i < 4; ++i) {
         u2[i]=ptr2[i];
@@ -56,7 +59,7 @@ inline void test_init4(){
       digitalWrite(LED2, LOW);
       digitalWrite(LED3, LOW);
     }
-    Serial.print(u);
+    /*Serial.print(u);
     Serial.print(",");
     Serial.print(u2[0]);
     Serial.print(",");
@@ -83,7 +86,7 @@ inline void test_init4(){
     Serial.print(v_mean);
     Serial.print(",");
     Serial.print(v);
-    Serial.print("\r\n");
+    Serial.print("\r\n");*/
     v=v+0.1*u2[0];
     if(v<0){
       houkou=0;
@@ -133,7 +136,7 @@ inline void test_init4(){
       end=1;
     }
     
-    myFile = SD.open("Lidar/350-4mm.txt", FILE_WRITE);
+    myFile = SD.open(dirname+"/"+filename+".txt", FILE_WRITE);
     if (myFile && !(end==1)) {
     //Serial.print("Writing to test_ground.txt...");
     myFile.printf("%d,%d\r\n", u2[2],u2[3]);
@@ -173,12 +176,12 @@ void setup() {
    //; /* wait until SD card is mounted. */
   //}
   /* Create a new directory */
-  SD.mkdir("Lidar/");
+  SD.mkdir(dirname+"/");
   MP.RecvTimeout(0);
   MP.Recv(&msgid_main,&speed_admain,1);
-  myFile = SD.open("Lidar/350-4mm.txt", FILE_WRITE);
+  myFile = SD.open(dirname+"/"+filename+".txt", FILE_WRITE);
   if (myFile && !(end==1)) {
-  myFile.printf("------------\r\n");
+  myFile.printf("000000000000 00000000000\r\n");
   myFile.close();
   }
   Serial2.write("MD0118063616001\r\n");

@@ -3,4 +3,5 @@
 
 double* CBF1D(double u,double houkou);//LiDARからのデータ受信、座標変換,CBFの入力再設計を行う関数
 double* CBF1Dasym(double u, double v,double houkou);
+double* CBF1Dsym2(double u, double v,double houkou);
 #endif
